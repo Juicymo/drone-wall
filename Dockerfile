@@ -17,7 +17,8 @@ RUN \
   npm install -g bower &&\
   npm install -g grunt-cli &&\
   bower --allow-root install &&\
-  grunt deploy
+  grunt
+#  grunt deploy
 
 EXPOSE 3000
 CMD API_SCHEME=$API_SCHEME API_DOMAIN=$API_DOMAIN API_TOKEN=$API_TOKEN node server.js
