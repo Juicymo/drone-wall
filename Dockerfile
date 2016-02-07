@@ -10,7 +10,7 @@ RUN \
   apt-get update &&\
   apt-get install -y git curl wget
 
-RUN git clone -b fix-for-v4 https://github.com/athieriot/drone-wall.git /app
+RUN git clone -b master https://github.com/taueres/drone-wall.git /app
 WORKDIR /app
 RUN \
   npm install &&\
