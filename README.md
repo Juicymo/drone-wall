@@ -26,13 +26,13 @@ If you find bugs or issues, let us know via GitHub issues or feel free to fork t
 
 This Docker image will clone the drone/drone-wall git repo and build the node-js Drone Wall app (using the recommended toolchain npm & grunt) and starts it in a local environment mode on port 3000. This port is exposed out of the Docker container and can be mapped as needed.
 
-## Usage
+## Usage in Docker CLI
 
 You can use this image directly in Docker CLI just typing the following into Terminal:
 
 ```
 $ docker pull juicymo/drone-wall
-$ docker run -p 3000:3000 -e THEME=dark -e API_ROOT=$API_ROOT -e API_TOKEN=$API_TOKEN -e ORG_NAME=$ORG_NAME juicymo/drone-wall
+$ docker run -p 3000:4000 -e THEME=dark -e API_ROOT=$API_ROOT -e API_TOKEN=$API_TOKEN -e ORG_NAME=$ORG_NAME juicymo/drone-wall
 ```
 
 Where:
@@ -42,8 +42,68 @@ Where:
 * `$API_TOKEN` is your access token that will authenticate you with the Drone API (can be found in your Drone account settings)
 * `$ORG_NAME` is name of your organisation (eg. `Juicymo` or `Drone`)
 
+## Usage in `docker-compose`
+
+Or your can use this Docker image with `docker-compose` by creating the following `docker-compose.yml` file:
+
+```yaml
+version: '2'
+
+services:
+	drone-wall:
+		image: juicymo/drone-wall
+		ports:
+			- 3000:4000
+		restart: always
+		environment:
+			- THEME=${DRONE_WALL_THEME}
+			- ORG_NAME=${DRONE_WALL_ORG_NAME}
+			- API_ROOT=${DRONE_HOST}/api/
+			- API_TOKEN=${DRONE_WALL_TOKEN}
+```
+
+Environment variables can be specified by creating a `.env` file with the following content:
+
+```
+DRONE_HOST=https://drone.example.com
+DRONE_WALL_THEME=dark
+DRONE_WALL_ORG_NAME=Drone
+DRONE_WALL_TOKEN=<PUT_YOUR_DRONE_TOKEN_HERE>
+```
+
+The composition can be then run by invoking `docker-compose up` in the same folder where `docker-compose.yml` and `.env` files are.
+
+**Warning:** The `docker-compose.yml` and `.env` files HAVE TO BE in a same folder.
+
+### Optional dependency on `drone-server` service 
+
+We use one `docker-compose.yml` file to run both the Drone CI itself (consisting of `drone-server` and `drone-agent`) and Drone Wall at [Juicymo](http://www.juicymo.cz). If you do the same, you could add a dependency between `drone-wall` and `drone-server` services by adding `depends_on` directive to your `drone-wall` service definition. The updated `docker-compose.yml` will look like:
+
+
+```yaml
+version: '2'
+
+services:
+	drone-wall:
+		image: juicymo/drone-wall
+		ports:
+			- 3000:4000
+		restart: always
+		depends_on:
+			- drone-server
+		environment:
+			- THEME=${DRONE_WALL_THEME}
+			- ORG_NAME=${DRONE_WALL_ORG_NAME}
+			- API_ROOT=${DRONE_HOST}/api/
+			- API_TOKEN=${DRONE_WALL_TOKEN}
+```
+
+But we use two DNS records to access both services.
+
+## Notes
+
 We run both *Drone* and *Drone Wall* via docker containers on the same *DigitalOcean* droplet at [Juicymo](http://www.juicymo.cz). 
-Drone web UI is accessible at :80 and Drone Wall at :3000. Your setup can be similar and we do not have any issues with CORS from Drone Wall.
+Drone web UI is accessible at :80 and Drone Wall at :3000. Your setup can be similar.
 
 See source at [GitHub](https://github.com/Juicymo/drone-wall).
 
