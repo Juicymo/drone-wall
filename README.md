@@ -50,16 +50,16 @@ Or your can use this Docker image with `docker-compose` by creating the followin
 version: '2'
 
 services:
-	drone-wall:
-		image: juicymo/drone-wall
-		ports:
-			- 3000:4000
-		restart: always
-		environment:
-			- THEME=${DRONE_WALL_THEME}
-			- ORG_NAME=${DRONE_WALL_ORG_NAME}
-			- API_ROOT=${DRONE_HOST}/api/
-			- API_TOKEN=${DRONE_WALL_TOKEN}
+  drone-wall:
+    image: juicymo/drone-wall
+    ports:
+      - 3000:4000
+    restart: always
+    environment:
+      - THEME=${DRONE_WALL_THEME}
+      - ORG_NAME=${DRONE_WALL_ORG_NAME}
+      - API_ROOT=${DRONE_HOST}/api/
+      - API_TOKEN=${DRONE_WALL_TOKEN}
 ```
 
 Environment variables can be specified by creating a `.env` file with the following content:
@@ -84,18 +84,18 @@ We use one `docker-compose.yml` file to run both the Drone CI itself (consisting
 version: '2'
 
 services:
-	drone-wall:
-		image: juicymo/drone-wall
-		ports:
-			- 3000:4000
-		restart: always
-		depends_on:
-			- drone-server
-		environment:
-			- THEME=${DRONE_WALL_THEME}
-			- ORG_NAME=${DRONE_WALL_ORG_NAME}
-			- API_ROOT=${DRONE_HOST}/api/
-			- API_TOKEN=${DRONE_WALL_TOKEN}
+  drone-wall:
+    image: juicymo/drone-wall
+    ports:
+      - 3000:4000
+    restart: always
+    depends_on:
+      - drone-server
+    environment:
+      - THEME=${DRONE_WALL_THEME}
+      - ORG_NAME=${DRONE_WALL_ORG_NAME}
+      - API_ROOT=${DRONE_HOST}/api/
+      - API_TOKEN=${DRONE_WALL_TOKEN}
 ```
 
 But we use two DNS records to access both services.
