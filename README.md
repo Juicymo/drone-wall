@@ -1,8 +1,9 @@
 # Juicymo Drone CI Dashboard
 
-Dashboard for Drone CI we use at Juicymo (compatible with Drone 0.7.0)
+Dashboard for Drone CI we use at [Juicymo](https://www.juicymo.cz) (compatible with Drone 0.7.0)
 
-[![](https://badge.imagelayers.io/juicymo/drone-wall:latest.svg)](https://imagelayers.io/?images=juicymo/drone-wall:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/juicymo/drone-wall.svg)](https://microbadger.com/images/juicymo/drone-wall "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/juicymo/drone-wall.svg)](https://microbadger.com/images/juicymo/drone-wall "Get your own version badge on microbadger.com")
 
 ## Installation
 
@@ -77,7 +78,7 @@ The composition can be then run by invoking `docker-compose up` in the same fold
 
 ### Optional dependency on `drone-server` service 
 
-We use one `docker-compose.yml` file to run both the Drone CI itself (consisting of `drone-server` and `drone-agent`) and Drone Wall at [Juicymo](http://www.juicymo.cz). If you do the same, you could add a dependency between `drone-wall` and `drone-server` services by adding `depends_on` directive to your `drone-wall` service definition. The updated `docker-compose.yml` will look like:
+We use one `docker-compose.yml` file to run both the Drone CI itself (consisting of `drone-server` and `drone-agent`) and Drone Wall at [Juicymo](https://www.juicymo.cz). If you do the same, you could add a dependency between `drone-wall` and `drone-server` services by adding `depends_on` directive to your `drone-wall` service definition. The updated `docker-compose.yml` will look like:
 
 
 ```yaml
@@ -102,7 +103,7 @@ But we use two DNS records to access both services.
 
 ## Notes
 
-We run both *Drone* and *Drone Wall* via docker containers on the same *DigitalOcean* droplet at [Juicymo](http://www.juicymo.cz). 
+We run both *Drone* and *Drone Wall* via docker containers on the same *DigitalOcean* droplet at [Juicymo](https://www.juicymo.cz). 
 Drone web UI is accessible at :80 and Drone Wall at :3000. Your setup can be similar.
 
 See source at [GitHub](https://github.com/Juicymo/drone-wall).
