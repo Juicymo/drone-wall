@@ -3,7 +3,7 @@
 # see https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/ for Dockerfile best practices
 
 # build me with:
-# docker build -t "juicymo/drone-wall:1.1.0" .
+# docker build -t "juicymo/drone-wall:0.7.0" .
 
 # run me with:
 # docker run -p 3000:4000 -e THEME=dark -e API_ROOT=$API_DOMAIN -e API_TOKEN=$API_TOKEN -e ORG_NAME=$ORG_NAME juicymo/drone-wall
